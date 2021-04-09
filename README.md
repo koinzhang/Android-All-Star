@@ -11,7 +11,6 @@
     + [subsampling-scale-image-view](#subsampling-scale-image-view)
     + [uCrop](#ucrop)
     + [PictureSelector](#pictureselector)
-    + [Matisse](#matisse)
   * [文本](#文本)
     + [richeditor-android](#richeditor-android)
     + [TextSurface](#textsurface)
@@ -98,6 +97,7 @@
   * [~~NumberProgressBar~~](#numberprogressbar)
   * [~~picasso~~](#picasso)
   * [~~ViewPagerIndicator~~](#viewpagerindicator)
+  * [~~Matisse~~](#matisse)
 
 条目详细格式如下：
 
@@ -251,28 +251,6 @@ GitHub 🌟：10.1k
           jcenter()
           maven { url 'https://jitpack.io' }
        }
-    }
-```
-
-
-#### [Matisse](https://github.com/zhihu/Matisse)
-
-项目简介：🎆 A well-designed local image and video selector for Android
-
-GitHub 🌟：11.9k
-
-项目参考Blog：[Matisse 知乎图片选择框架](https://www.jianshu.com/p/41e09238d61b)
-
-项目引入
-
-```
-	repositories {
-    	jcenter()
-	}
-	
-    dependencies {
-        ...
-        implementation 'com.zhihu.android:matisse:$latest_version'
     }
 ```
 
@@ -1412,3 +1390,18 @@ Releases最新版本：2019年8月 Version-0.3.0
 不推荐原因：有更好的替代品
 
 替代框架：[MagicIndicator](https://github.com/hackware1993/MagicIndicator)https://github.com/hackware1993/MagicIndicator)
+
+### ~~[Matisse](https://github.com/zhihu/Matisse)~~
+
+GitHub 🌟：11.9
+
+GitHub更新时间：2019年10月
+
+Releases最新版本：2019年8月 Version-0.3.0
+
+不推荐原因：已停止维护[DEPRECATED]
+
+替代框架：[PictureSelector](https://github.com/LuckSiege/PictureSelector)
+
+
+
