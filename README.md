@@ -1397,7 +1397,7 @@ GitHub 🌟：11.9
 
 GitHub更新时间：2019年10月
 
-Releases最新版本：2019年8月 Version-0.3.0
+Releases最新版本：2019年10月 Version-0.5.3
 
 不推荐原因：已停止维护[DEPRECATED]
 
