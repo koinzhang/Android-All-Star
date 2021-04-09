@@ -5,7 +5,6 @@
 - [界面](#界面)
   * [图片](#图片)
     + [android-gif-drawable](#android-gif-drawable)
-    + [Glide](#glide)
     + [CircleImageView](#circleimageview)
     + [RoundedImageView](#roundedimageview)
     + [PhotoView](#photoview)
@@ -45,25 +44,49 @@
   * [布局](#布局)
     + [vlayout](#vlayout)
     + [AndroidAutoSize](#androidautosize)
+  * [通信](#通信)
+    + [ARouter](#arouter)
+    + [EventBus](#eventbus)
   * [其它](#其它)
     + [BaseRecyclerViewAdapterHelper](#baserecyclerviewadapterhelper)
     + [MultiLanguages](#multilanguages)
     + [QMUI_Android](#qmui_android)
     + [SmartRefreshLayout](#smartrefreshlayout)
-- [通信](#通信)
-  + [ARouter](#arouter)
-  + [EventBus](#eventbus)
-  + [gson](#gson)
-  + [retrofit](#retrofit)
+- [图片](#图片)
+  * [图片加载](#图片加载)
+    + [Glide](#glide)
+    + [fresco](#fresco)
+    + [Android-Universal-Image-Loader](#android-universal-image-loader)
+  * [图片处理](#图片处理)
+    + [glide-transformations](#glide-transformations)
+    + [Luban](#luban)
+    + [android-gpuimage](#android-gpuimage)
+- [视频](#视频)
+  * [播放器](#播放器)
+    + [ijkplayer](#ijkplayer)
+    + [GSYVideoPlayer](#gsyvideoplayer)
+- [网络](#网络)
+  * [json](#json)
+    + [gson](#gson)
+    + [fastjson](#fastjson)
+  * [框架](#框架)
+    + [retrofit](#retrofit)
+    + [okhttp](#okhttp)
+    + [volley](#volley)
+    + [Java-WebSocket](#java-websocket)
+  * [文件下载](#文件下载)
+    + [FileDownloader](#filedownloader)
+    + [okdownload](#okdownload)
+    + [PRDownloader](#prdownloader)
 - [存储](#存储)
-  + [MMKV](#-mmkv--https---githubcom-tencent-mmkv-)
+  + [MMKV](#mmkv)
 - [优化](#优化)
-  + [leakcanary](#-leakcanary--https---githubcom-square-leakcanary-)
+  + [leakcanary](#leakcanary)
 - [日志](#日志)
-  + [logger](#-logger--https---githubcom-orhanobut-logger-)
-  + [timber](#-timber--https---githubcom-jakewharton-timber-)
+  + [logger](#logger)
+  + [timber](#timber)
 - [权限](#权限)
-  + [PermissionX](#-permissionx--https---githubcom-guolindev-permissionx-)
+  + [PermissionX](#permissionx)
 - [不再推荐](#不再推荐)
   * [~~AndroidEventBus~~](#androideventbus)
   * [~~BadgeView~~](#badgeview)
@@ -106,21 +129,6 @@ GitHub 🌟：8.7k
         ...
         implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
     }
-```
-
-#### [Glide](https://github.com/bumptech/glide)
-
-项目简介：An image loading and caching library for Android focused on smooth scrolling
-
-GitHub 🌟：31k
-
-项目参考Blog：[Glide使用总结](https://www.jianshu.com/p/791ee473a89b)
-
-项目引入
-
-```
-      implementation 'com.github.bumptech.glide:glide:4.12.0'
-      annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 ```
 
 #### [CircleImageView](https://github.com/hdodenhof/CircleImageView)
@@ -634,6 +642,55 @@ GitHub 🌟：8k
     }
 ```
 
+### 通信
+
+#### [ARouter](https://github.com/alibaba/ARouter)
+
+项目简介：一个用于帮助 Android App 进行组件化改造的框架 —— 支持模块间的路由、通信、解耦
+
+GitHub 🌟：13k
+
+项目参考Blog：[ARouter/README_CN.md](https://github.com/alibaba/ARouter/blob/master/README_CN.md)
+
+项目引入
+
+```
+    android {
+        defaultConfig {
+            ...
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [AROUTER_MODULE_NAME: project.getName()]
+                }
+            }
+        }
+    }
+
+    dependencies {
+        // 替换成最新版本, 需要注意的是api
+        // 要与compiler匹配使用，均使用最新版可以保证兼容
+        compile 'com.alibaba:arouter-api:x.x.x'
+        annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
+        ...
+    }
+    // 旧版本gradle插件(< 2.2)，可以使用apt插件，配置方法见文末'其他#4'
+    // Kotlin配置参考文末'其他#5'
+```
+
+#### [EventBus](https://github.com/greenrobot/EventBus)
+
+项目简介：Event bus for Android and Java that simplifies communication between Activities, Fragments, Threads, Services, etc. Less code, better quality
+
+GitHub 🌟：23.3k
+
+项目参考Blog：[Android EventBus 的使用](https://www.jianshu.com/p/e7d5c7bda783)
+
+项目引入
+
+```
+  implementation 'org.greenrobot:eventbus:3.2.0'
+```
+
 ### 布局
 
 ####  [vlayout](https://github.com/alibaba/vlayout)
@@ -775,54 +832,204 @@ GitHub 🌟：22.4k
     implementation  'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
 ```
 
-### 通信
+## 图片
 
-#### [ARouter](https://github.com/alibaba/ARouter)
+### 图片加载
 
-项目简介：一个用于帮助 Android App 进行组件化改造的框架 —— 支持模块间的路由、通信、解耦
+#### [Glide](https://github.com/bumptech/glide)
 
-GitHub 🌟：13k
+项目简介：An image loading and caching library for Android focused on smooth scrolling
 
-项目参考Blog：[ARouter/README_CN.md](https://github.com/alibaba/ARouter/blob/master/README_CN.md)
+GitHub 🌟：31k
+
+项目参考Blog：[Glide使用总结](https://www.jianshu.com/p/791ee473a89b)
 
 项目引入
 
 ```
-    android {
-        defaultConfig {
-            ...
-            javaCompileOptions {
-                annotationProcessorOptions {
-                    arguments = [AROUTER_MODULE_NAME: project.getName()]
-                }
-            }
-        }
+      implementation 'com.github.bumptech.glide:glide:4.12.0'
+      annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+```
+
+#### [fresco](https://github.com/facebook/fresco)
+
+项目简介：An Android library for managing images and the memory they use.
+
+GitHub 🌟：16.5k
+
+项目参考Blog：[Fresco中文文档](https://www.fresco-cn.org/docs/index.html)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        implementation 'com.facebook.fresco:fresco:2.4.0'
     }
+```
+
+#### [Android-Universal-Image-Loader](https://github.com/nostra13/Android-Universal-Image-Loader)
+
+项目简介：Powerful and flexible library for loading, caching and displaying images on Android.
+
+GitHub 🌟：16.8k
+
+项目参考Blog：[Home](https://github.com/nostra13/Android-Universal-Image-Loader/wiki)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    }
+```
+
+### 图片处理
+
+#### [glide-transformations](https://github.com/wasabeef/glide-transformations)
+
+项目简介：An Android transformation library providing a variety of image transformations for Glide.
+
+GitHub 🌟：9.3k
+
+项目参考Blog：[Glide-更多图片变换，glide-transformations的使用（六）](https://blog.csdn.net/u010356768/article/details/78455117)
+
+项目引入
+
+```
+	repositories {
+  		mavenCentral()
+	}
 
     dependencies {
-        // 替换成最新版本, 需要注意的是api
-        // 要与compiler匹配使用，均使用最新版可以保证兼容
-        compile 'com.alibaba:arouter-api:x.x.x'
-        annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
         ...
+        implementation 'jp.wasabeef:glide-transformations:4.3.0'
+  		// If you want to use the GPU Filters
+  		implementation 'jp.co.cyberagent.android:gpuimage:2.1.0'
+
     }
-    // 旧版本gradle插件(< 2.2)，可以使用apt插件，配置方法见文末'其他#4'
-    // Kotlin配置参考文末'其他#5'
 ```
 
-#### [EventBus](https://github.com/greenrobot/EventBus)
+#### [Luban](https://github.com/Curzibn/Luban)
 
-项目简介：Event bus for Android and Java that simplifies communication between Activities, Fragments, Threads, Services, etc. Less code, better quality
+项目简介：Luban(鲁班)—Image compression with efficiency very close to WeChat Moments/可能是最接近微信朋友圈的图片压缩算法
 
-GitHub 🌟：23.3k
+GitHub 🌟：12.4k
 
-项目参考Blog：[Android EventBus 的使用](https://www.jianshu.com/p/e7d5c7bda783)
+项目参考Blog：[Android 图片压缩之-Luban的使用](https://blog.csdn.net/oZhuiMeng123/article/details/85041624)
 
 项目引入
 
 ```
-  implementation 'org.greenrobot:eventbus:3.2.0'
+    dependencies {
+        ...
+        implementation 'top.zibin:Luban:1.1.8'
+    }
 ```
+
+#### [android-gpuimage](https://github.com/cats-oss/android-gpuimage)
+
+项目简介：Android filters based on OpenGL (idea from GPUImage for iOS)
+
+GitHub 🌟：7.8k
+
+项目参考Blog：[Usage](https://github.com/cats-oss/android-gpuimage#usage)
+
+项目引入
+
+```
+	repositories {
+    	mavenCentral()
+	}
+	
+    dependencies {
+        ...
+        implementation 'jp.co.cyberagent.android:gpuimage:2.x.x'
+    }
+```
+
+## 视频
+
+### 播放器
+
+#### [ijkplayer](https://github.com/Bilibili/ijkplayer)
+
+项目简介：Android上一个优雅、万能自定义UI、支持周视图、自定义周起始、性能高效的日历控件，支持热插拔实现的UI定制！
+
+GitHub 🌟：28.5k
+
+项目参考Blog：[Android 超好用的播放器——ijkplayer](https://www.jianshu.com/p/c5d972ab0309)
+
+项目引入
+
+```
+	allprojects {
+    	repositories {
+        	jcenter()
+    	}
+	}
+
+    dependencies {
+    # required, enough for most devices.
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+
+    # Other ABIs: optional
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
+
+    # ExoPlayer as IMediaPlayer: optional, experimental
+    implementation 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
+}
+```
+
+#### [GSYVideoPlayer](https://github.com/CarGuo/GSYVideoPlayer)
+
+项目简介：视频播放器（IJKplayer、ExoPlayer、MediaPlayer），HTTPS，支持弹幕，外挂字幕，支持滤镜、水印、gif截图，片头广告、中间广告，多个同时播放，支持基本的拖动，声音、亮度调节，支持边播边缓存，支持视频自带rotation的旋转（90,270之类），重力旋转与手动旋转的同步支持，支持列表播放 ，列表全屏动画，视频加载速度，列表小窗口支持拖动，动画效果，调整比例，多分辨率切换，支持切换播放器，进度条小窗口预览，列表切换详情页面无缝播放，rtsp、concat、mpeg。
+
+GitHub 🌟：16k
+
+项目参考Blog：[三种简单的使用方法](https://github.com/CarGuo/GSYVideoPlayer/blob/master/doc/USE.md)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        //A.完整版引入
+		implementation 'com.shuyu:GSYVideoPlayer:8.1.2'
+		
+		//B.添加java和你想要的so支持
+		implementation 'com.shuyu:gsyVideoPlayer-java:8.1.2'
+
+		//是否需要ExoPlayer模式
+		implementation 'com.shuyu:GSYVideoPlayer-exo2:8.1.2'
+
+		//根据你的需求ijk模式的so
+		implementation 'com.shuyu:gsyVideoPlayer-armv5:8.1.2'
+		implementation 'com.shuyu:gsyVideoPlayer-armv7a:8.1.2'
+		implementation 'com.shuyu:gsyVideoPlayer-arm64:8.1.2'
+		implementation 'com.shuyu:gsyVideoPlayer-x64:8.1.2'
+		implementation 'com.shuyu:gsyVideoPlayer-x86:8.1.2'
+		
+		//C.支持其他格式协议的（mpeg，rtsp, concat、crypto协议）
+		//A、B普通版本支持263/264/265等，对于mpeg编码会有声音无画面情况。 C 引入的so支持mpeg编码和其他补充协议，但是so包相对变大。
+		implementation 'com.shuyu:gsyVideoPlayer-java:8.1.2'
+
+		//是否需要ExoPlayer模式
+		implementation 'com.shuyu:GSYVideoPlayer-exo2:8.1.2'
+
+		//更多ijk的编码支持
+		implementation 'com.shuyu:gsyVideoPlayer-ex_so:8.1.2'
+    }
+```
+
+## 网络
+
+### json
 
 #### [gson](https://github.com/google/gson)
 
@@ -838,6 +1045,25 @@ GitHub 🌟：19.4k
     implementation 'com.google.code.gson:gson:2.8.6'
 ```
 
+#### [fastjson](https://github.com/alibaba/fastjson)
+
+项目简介：A fast JSON parser/generator for Java.
+
+GitHub 🌟：23.2k
+
+项目参考Blog：[Quick Start CN](https://github.com/alibaba/fastjson/wiki/Quick-Start-CN)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        implementation 'com.alibaba:fastjson:1.1.72.android'
+    }
+```
+
+### 框架
+
 #### [retrofit](https://github.com/square/retrofit)
 
 项目简介：A type-safe HTTP client for Android and Java.
@@ -850,6 +1076,120 @@ GitHub 🌟：37.9k
 
 ```
     implementation 'com.squareup.retrofit2:retrofit:(insert latest version)'
+```
+
+#### [okhttp](https://github.com/square/okhttp)
+
+项目简介：Square’s meticulous HTTP client for the JVM, Android, and GraalVM.
+
+GitHub 🌟：39.7k
+
+项目参考Blog：[OkHttp](https://square.github.io/okhttp/)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    }
+```
+
+#### [volley](https://github.com/google/volley)
+
+项目简介：Volley is an HTTP library that makes networking for Android apps easier and, most importantly, faster.
+
+GitHub 🌟：3k
+
+项目参考Blog：[Android Volley使用（一）Volley的基本用法](https://blog.csdn.net/u010356768/article/details/87720280)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        implementation 'com.android.volley:volley:1.2.0'
+    }
+```
+
+#### [Java-WebSocket](https://github.com/TooTallNate/Java-WebSocket)
+
+项目简介：A barebones WebSocket client and server implementation written in 100% Java.
+
+GitHub 🌟：7.9k
+
+项目参考Blog：[java WebSocket开发入门WebSocket](https://www.jianshu.com/p/d79bf8174196)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        implementation 'org.java-websocket:Java-WebSocket:1.5.1'
+    }
+```
+
+### 文件下载
+
+#### [FileDownloader](https://github.com/lingochamp/FileDownloader)
+
+项目简介：Android 文件下载引擎，稳定、高效、灵活、简单易用
+
+GitHub 🌟：10.1k
+
+项目参考Blog：[FileDownloader](https://github.com/lingochamp/FileDownloader/blob/master/README-zh.md)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        implementation 'com.liulishuo.filedownloader:library:1.7.7'
+    }
+```
+
+#### [okdownload](https://github.com/lingochamp/okdownload)
+
+项目简介：可靠，灵活，高性能以及强大的下载引擎。
+
+GitHub 🌟：4.2k
+
+项目参考Blog：[Simple Use Guideline](https://github.com/lingochamp/okdownload/wiki/Simple-Use-Guideline)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        // core
+		com.liulishuo.okdownload:okdownload:{latest_version}
+		// provide sqlite to store breakpoints
+		com.liulishuo.okdownload:sqlite:{latest_version}
+		// provide okhttp to connect to backend
+		// and then please import okhttp dependencies by yourself
+		com.liulishuo.okdownload:okhttp:{latest_version}
+		// provide interface to match filedownloader
+		com.liulishuo.okdownload:filedownloader:{latest_version}
+		// provide interface for kotlin extension
+		com.liulishuo.okdownload:ktx{latest_version}
+    }
+```
+
+#### [PRDownloader](https://github.com/MindorksOpenSource/PRDownloader)
+
+项目简介：A file downloader library for Android with pause and resume support
+
+GitHub 🌟：2.8k
+
+项目参考Blog：[安卓文件下载库 | PRDownloader](https://www.jianshu.com/p/3cf8b31f3a11)
+
+项目引入
+
+```
+    dependencies {
+        ...
+        implementation 'com.mindorks.android:prdownloader:0.6.0'
+    }
 ```
 
 ## 存储
