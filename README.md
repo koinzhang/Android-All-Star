@@ -2,6 +2,8 @@
 
 全新[Android-All-Star](http://39.97.67.178:8888)页面，以后的更新会在此页面进行
 
+<img width="1420" alt="Android-All-Star" src="https://user-images.githubusercontent.com/36128970/114408936-8156ec80-9bdc-11eb-9cb7-2d09a110c89f.png">
+
 - [界面](#界面)
   * [图片](#图片)
     + [android-gif-drawable](#android-gif-drawable)
