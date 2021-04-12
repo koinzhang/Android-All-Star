@@ -1,6 +1,6 @@
 记一些项目中遇到的第三方组件或框架，如果以下条目有更好的替代品，欢迎提出！Star and Respect All!
 
-[GitHub Pages](https://cheatgz.github.io/Android-All-Star/)
+全新[Android-All-Star](http://39.97.67.178:8888)页面，以后的更新会在此页面进行
 
 - [界面](#界面)
   * [图片](#图片)
